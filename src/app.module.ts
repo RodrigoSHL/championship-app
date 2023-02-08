@@ -1,25 +1,19 @@
 import { Module } from '@nestjs/common';
-import { PokemonModule } from './pokemon/pokemon.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import { CommonModule } from './common/common.module';
-import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
-import { EnvConfiguration } from './common/config/config';
-import { JoiValidationSchema } from './common/config/joi.validation';
-import { AuthModule } from './auth/auth.module';
-import { EventModule } from './event/event.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [EnvConfiguration],
-      validationSchema: JoiValidationSchema,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      database: process.env.DB_NAME,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      autoLoadEntities: true,
+      synchronize: true,
     }),
-    MongooseModule.forRoot(process.env.MONGO_DB),
-    PokemonModule,
-    CommonModule,
-    SeedModule,
-    AuthModule,
-    EventModule,
   ],
   controllers: [],
   providers: [],
