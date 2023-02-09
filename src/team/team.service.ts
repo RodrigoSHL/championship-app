@@ -41,8 +41,10 @@ export class TeamService {
     return `This action updates a #${id} team`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async remove(id: string) {
+    const team = await this.findOne( id );
+    await this.teamRepository.remove( team );
+    
   }
 
   private handleDBExceptions( error: any ) {
