@@ -13,7 +13,7 @@ export class TeamController {
   }
 
   @Get()
-  findAll() {
+  findAll() { 
     return this.teamService.findAll();
   }
 
@@ -29,6 +29,6 @@ export class TeamController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.teamService.remove(+id);
+    return this.teamService.remove(id);
   }
 }

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TeamModule } from './team/team.module';
+import { MaintainerModule } from './maintainer/maintainer.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -15,9 +15,9 @@ import { TeamModule } from './team/team.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TeamModule,
+    MaintainerModule,
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}
