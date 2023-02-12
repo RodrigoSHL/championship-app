@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MaintainerModule } from './maintainer/maintainer.module';
+import { CommonModule } from './common/common.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -16,6 +17,7 @@ import { MaintainerModule } from './maintainer/maintainer.module';
       synchronize: true,
     }),
     MaintainerModule,
+    CommonModule,
   ],
   controllers: [],
   providers: []
