@@ -53,8 +53,16 @@ export class TeamService {
     return team;
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async update(id: string, updateTeamDto: UpdateTeamDto) {
+    const team = await this.teamRepository.preload({
+      id: id,
+      ...updateTeamDto
+    })
+    if (!team) throw new NotFoundException(`Team with id ${id} not found`);
+
+
+
+    return this.teamRepository.save(team);
   }
 
   async remove(id: string) {
