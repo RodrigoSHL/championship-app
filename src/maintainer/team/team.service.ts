@@ -60,9 +60,13 @@ export class TeamService {
     })
     if (!team) throw new NotFoundException(`Team with id ${id} not found`);
 
-
-
-    return this.teamRepository.save(team);
+    try {
+      await this.teamRepository.save( team );
+      return team;
+      
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
   }
 
   async remove(id: string) {
